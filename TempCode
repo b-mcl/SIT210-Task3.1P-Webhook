@@ -1,0 +1,25 @@
+#include "Adafruit_DHT.h"
+
+
+#define DHTPIN 2 
+
+#define DHTTYPE DHT22
+
+DHT dht(DHTPIN, DHTTYPE);//initializes values - included in dht library
+
+void setup() {
+	Serial.begin(9600); 
+	dht.begin();
+}
+
+void loop() {
+	delay(30000);
+
+	float h = dht.getHumidity();
+// Read temperature as Celsius
+	float temp = dht.getTempCelcius();
+
+
+	
+	Particle.publish("temp", String(temp), PRIVATE);
+}
